@@ -33,8 +33,19 @@ public class Customer {
     public void changeBooking(int bookingId, Lesson newLesson) {
         Booking booking = getBookingById(bookingId);
         if (booking != null) {
-            booking.setLesson(newLesson);
-            System.out.println("Booking changed!");
+            if (newLesson.getAttendees().size() < newLesson.getCapacity()) {
+                // Release one place from the previously booked lesson
+                booking.getLesson().removeAttendee(this);
+
+                // Update the booking with the new lesson
+                booking.setLesson(newLesson);
+                newLesson.addAttendee(this);
+                booking.setStatus("Changed"); // Update the booking status
+
+                System.out.println("Booking change is successful!");
+            } else {
+                System.out.println("Lesson is full! Please select another lesson.");
+            }
         } else {
             System.out.println("Invalid booking ID!");
         }
@@ -57,6 +68,10 @@ public class Customer {
 
     public boolean hasBookingForLesson(int lessonId) {
         return bookings.stream().anyMatch(booking -> booking.getLesson().getId() == lessonId);
+    }
+
+    public boolean hasAttendedLesson(int lessonId) {
+        return bookings.stream().anyMatch(booking -> booking.getLesson().getId() == lessonId && booking.getStatus().equals("Attended"));
     }
 
 }
