@@ -40,4 +40,38 @@ public class Timetable {
             System.out.println("Lesson ID: " + lesson.getId() + " | Type: " + lesson.getType() + " | Day: " + lesson.getDay() + " | Price: " + lesson.getPrice());
         }
     }
+
+    public void displayTimetableByDay(String day) {
+        if (!Lesson.isValidDay(day)) {
+            System.out.println("Invalid day: " + day);
+            return;
+        }
+        System.out.println("\nTimetable for " + day + ":");
+        lessons.stream()
+                .filter(lesson -> lesson.getDay().equalsIgnoreCase(day))
+                .forEach(lesson -> System.out.println("Lesson ID: " + lesson.getId() + " | Type: " + lesson.getType() + " | Day: " + lesson.getDay() + " | Price: " + lesson.getPrice()));
+    }
+
+    public void displayTimetableByType(String type) {
+        if (!Lesson.isValidType(type)) {
+            System.out.println("Invalid type: " + type);
+            return;
+        }
+        System.out.println("\nTimetable for " + type + ":");
+        lessons.stream()
+                .filter(lesson -> lesson.getType().equalsIgnoreCase(type))
+                .forEach(lesson -> System.out.println("Lesson ID: " + lesson.getId() + " | Type: " + lesson.getType() + " | Day: " + lesson.getDay() + " | Price: " + lesson.getPrice()));
+    }
+
+    public void displayTimetableByDayAndType(String day, String type) {
+        if (!Lesson.isValidDay(day) || !Lesson.isValidType(type)) {
+            System.out.println("Invalid day or type: " + day + ", " + type);
+            return;
+        }
+        System.out.println("\nTimetable for " + day + " and " + type + ":");
+        lessons.stream()
+                .filter(lesson -> lesson.getDay().equalsIgnoreCase(day) && lesson.getType().equalsIgnoreCase(type))
+                .forEach(lesson -> System.out.println("Lesson ID: " + lesson.getId() + " | Type: " + lesson.getType() + " | Day: " + lesson.getDay() + " | Price: " + lesson.getPrice()));
+    }
+
 }
