@@ -34,10 +34,27 @@ public class Timetable {
         return lessons.stream().filter(lesson -> lesson.getId() == id).findFirst().orElse(null);
     }
 
+    public String getTimeSlot(String type) {
+        switch (type.toLowerCase()) {
+            case "spin":
+                return "2pm-4pm";
+            case "yoga":
+                return "4pm-6pm";
+            case "bodysculpt":
+                return "6pm-8pm";
+            case "zumba":
+                return "8pm-10pm";
+            default:
+                return "Unknown";
+        }
+    }
+
     public void displayTimetable() {
         System.out.println("\nTimetable:");
         for (Lesson lesson : lessons) {
-            System.out.println("Lesson ID: " + lesson.getId() + " | Type: " + lesson.getType() + " | Day: " + lesson.getDay() + " | Price: " + lesson.getPrice());
+            int week = (lesson.getId() - 1) / 8 + 1;
+            String timeSlot = getTimeSlot(lesson.getType());
+            System.out.println("Lesson ID: " + lesson.getId() + " | Type: " + lesson.getType() + " | Week: " + week + " | Day: " + lesson.getDay() + " | Time Slot: " + timeSlot + " | Price: " + lesson.getPrice());
         }
     }
 
@@ -49,7 +66,11 @@ public class Timetable {
         System.out.println("\nTimetable for " + day + ":");
         lessons.stream()
                 .filter(lesson -> lesson.getDay().equalsIgnoreCase(day))
-                .forEach(lesson -> System.out.println("Lesson ID: " + lesson.getId() + " | Type: " + lesson.getType() + " | Day: " + lesson.getDay() + " | Price: " + lesson.getPrice()));
+                .forEach(lesson -> {
+                    int week = (lesson.getId() - 1) / 8 + 1;
+                    String timeSlot = getTimeSlot(lesson.getType());
+                    System.out.println("Lesson ID: " + lesson.getId() + " | Type: " + lesson.getType() + " | Week: " + week + " | Day: " + lesson.getDay() + " | Time Slot: " + timeSlot + " | Price: " + lesson.getPrice());
+                });
     }
 
     public void displayTimetableByType(String type) {
@@ -60,7 +81,11 @@ public class Timetable {
         System.out.println("\nTimetable for " + type + ":");
         lessons.stream()
                 .filter(lesson -> lesson.getType().equalsIgnoreCase(type))
-                .forEach(lesson -> System.out.println("Lesson ID: " + lesson.getId() + " | Type: " + lesson.getType() + " | Day: " + lesson.getDay() + " | Price: " + lesson.getPrice()));
+                .forEach(lesson -> {
+                    int week = (lesson.getId() - 1) / 8 + 1;
+                    String timeSlot = getTimeSlot(lesson.getType());
+                    System.out.println("Lesson ID: " + lesson.getId() + " | Type: " + lesson.getType() + " | Week: " + week + " | Day: " + lesson.getDay() + " | Time Slot: " + timeSlot + " | Price: " + lesson.getPrice());
+                });
     }
 
     public void displayTimetableByDayAndType(String day, String type) {
@@ -71,7 +96,11 @@ public class Timetable {
         System.out.println("\nTimetable for " + day + " and " + type + ":");
         lessons.stream()
                 .filter(lesson -> lesson.getDay().equalsIgnoreCase(day) && lesson.getType().equalsIgnoreCase(type))
-                .forEach(lesson -> System.out.println("Lesson ID: " + lesson.getId() + " | Type: " + lesson.getType() + " | Day: " + lesson.getDay() + " | Price: " + lesson.getPrice()));
+                .forEach(lesson -> {
+                    int week = (lesson.getId() - 1) / 8 + 1;
+                    String timeSlot = getTimeSlot(lesson.getType());
+                    System.out.println("Lesson ID: " + lesson.getId() + " | Type: " + lesson.getType() + " | Week: " + week + " | Day: " + lesson.getDay() + " | Time Slot: " + timeSlot + " | Price: " + lesson.getPrice());
+                });
     }
 
 }
