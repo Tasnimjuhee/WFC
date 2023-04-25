@@ -22,13 +22,3 @@ public class Review {
         return rating;
     }
 }
-
-
-public String getReview() {
-        return review;
-    }
-
-    public int getRating() {
-        return rating;
-    }
-}
