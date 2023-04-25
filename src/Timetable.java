@@ -50,7 +50,7 @@ public class Timetable {
     }
 
     public void displayTimetable() {
-        System.out.println("\nTimetable:");
+        System.out.println("\n Timetable:");
         for (Lesson lesson : lessons) {
             int week = (lesson.getId() - 1) / 8 + 1;
             String timeSlot = getTimeSlot(lesson.getType());
@@ -101,6 +101,13 @@ public class Timetable {
                     String timeSlot = getTimeSlot(lesson.getType());
                     System.out.println("Lesson ID: " + lesson.getId() + " | Type: " + lesson.getType() + " | Week: " + week + " | Day: " + lesson.getDay() + " | Time Slot: " + timeSlot + " | Price: " + lesson.getPrice());
                 });
+
+        System.out.println("\n\nFull Timetable Slot(If need to change day or fitness type):\n");
+        for (Lesson lesson : lessons) {
+            int week = (lesson.getId() - 1) / 8 + 1;
+            String timeSlot = getTimeSlot(lesson.getType());
+            System.out.println("Lesson ID: " + lesson.getId() + " | Type: " + lesson.getType() + " | Week: " + week + " | Day: " + lesson.getDay() + " | Time Slot: " + timeSlot + " | Price: " + lesson.getPrice());
+        }
     }
 
 }
